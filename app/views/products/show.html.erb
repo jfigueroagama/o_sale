@@ -1,0 +1,54 @@
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-10 offset-md-1">
+            <img class="img-fluid" src="http://placehold.it/350x150" width="100%">
+        </div>
+
+        <div class="col-md-10 offset-md-1">
+
+            <div class="float-right">
+            <h3>
+                <span class="badge badge-pill badge-purple">
+                    <%= number_to_currency(@product.price) %>
+                </span>
+            </h3>
+            </div>
+            <div>
+            <h3><%= @product.name %></h3>
+            </div>
+            <div class="mb-4">
+                <%= @product.description %>
+            </div>
+            <div class="float-right btn-edit-del">
+            <a href="#" class="btn btn-outline-danger btn-lg">Delete</a>
+            </div>
+            <div class="btn-edit-del">
+            <a href="#" class="btn btn-outline-purple btn-lg">Edit</a>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-10 offset-md-1 reviews-form">
+            <h1 class="text-center form-header-style mt-5 pt-2 pb-3">
+                Add Comments
+            </h1>
+
+            <div class="form-body-style px-5 pt-4">
+                <form> 
+                    <div class='form-group row'>
+                    <label class="col-md-2 col-form-label">New Comment</label>
+                    <div class='col-md-9'>
+                        <textarea rows='5', class='form-control',
+                        placeholder: 'Your comment'>
+                        </textarea>
+                    </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
