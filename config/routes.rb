@@ -3,6 +3,16 @@ Rails.application.routes.draw do
   root to: "products#index"
 
   resources :products
+
+  get 'users/new', to: 'users#new', as: 'new_user'
+  get '/signup', to: 'users#new'
+
+  resources :users, only: [:create]
+
+  get '/signin', to: 'sessions#new'
+  post '/signin', to: 'sessions#create'
+  delete '/signout', to: 'sessions#destroy', as: 'session'
+
   #get '/products', to: 'products#index'
   #get 'products/new', to: 'products#new', as: 'new_product'
   #get '/products/:id', to: 'products#show', as: 'product'
