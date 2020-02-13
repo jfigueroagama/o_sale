@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
-
-    before_action   :find_product, only: [:show, :edit, :update, :destroy]
+    before_action :require_signin, except: [:index, :show]
+    before_action :find_product, only: [:show, :edit, :update, :destroy]
+    before_action :require_owner, only: [:edit, :update, :destroy]
 
     def index
         @products = Product.all
@@ -15,6 +16,7 @@ class ProductsController < ApplicationController
 
     def create
         @product = Product.new(product_params)
+        @product.user = current_user
         if @product.save
             flash[:notice] = "Product has been saved"
             redirect_to root_path
@@ -45,7 +47,7 @@ class ProductsController < ApplicationController
     private
 
     def product_params
-        params.require(:product).permit(:name, :price, :description, :image_url)
+        params.require(:product).permit(:name, :price, :quantity, :description, :image_url)
     end
 
     def find_product
@@ -53,8 +55,14 @@ class ProductsController < ApplicationController
             @product = Product.find(params[:id]) 
         rescue ActiveRecord::RecordNotFound
             redirect_to root_path
+        end    
+    end
+
+    def require_owner
+        unless @product.owned_by?(current_user)
+            flash[:alert] = "Access denied"
+            redirect_to root_path
         end
-        
     end
 
 end
