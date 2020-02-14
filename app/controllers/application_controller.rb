@@ -13,5 +13,5 @@ class ApplicationController < ActionController::Base
         end
     end
 
-    helper_method :current_user     # The current_method will be available in the view
+    helper_method :current_user     # The current_user method will be available in the view
 end

@@ -6,6 +6,7 @@ class Product < ApplicationRecord
     validates :quantity, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 
     belongs_to :user
+    has_many :comments, dependent: :destroy
 
     def owned_by?(owner)
         user == owner

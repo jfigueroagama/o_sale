@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: "products#index"
 
-  resources :products
+  resources :products do
+    resources :comments, only: [:create]    # product_comments_path
+  end
 
   get 'users/new', to: 'users#new', as: 'new_user'
   get '/signup', to: 'users#new'
