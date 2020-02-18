@@ -15,6 +15,17 @@ Rails.application.routes.draw do
   post '/signin', to: 'sessions#create'
   delete '/signout', to: 'sessions#destroy', as: 'session'
 
+  namespace :api do
+    namespace :v1 do
+      resources :products do
+        resources :comments, only: [:create]
+      end
+      resources :users, only: [:create]
+      post '/signin', to: 'sessions#create'
+      delete '/signout', to: 'sessions#destroy', as: 'session'
+    end
+  end
+
   #get '/products', to: 'products#index'
   #get 'products/new', to: 'products#new', as: 'new_product'
   #get '/products/:id', to: 'products#show', as: 'product'
